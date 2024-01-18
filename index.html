@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Three JS </title>
+</head>
+
+<body>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://unpkg.com/three@0.140.0/build/three.module.js",
+            "controls": "https://unpkg.com/three@0.140.0/examples/jsm/controls/OrbitControls.js",
+            "three/addons/": "https://unpkg.com/three@0.140.0/examples/jsm/"
+          }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'controls';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+
+        // Membuat balok pertama
+        const geometry1 = new THREE.BoxGeometry(2, 1, 1);
+        const material1 = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+        const cube1 = new THREE.Mesh(geometry1, material1);
+        cube1.position.set(0, 0, 0);
+        scene.add(cube1);
+
+        // Jarak antara balok pertama dan kedua
+        const gap = 0.1;
+
+        // Membuat balok kedua
+        const geometry2 = new THREE.BoxGeometry(2, 1, 1);
+        const material2 = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+        const cube2 = new THREE.Mesh(geometry2, material2);
+        cube2.position.set(0, 1 + gap, 0); // Atur posisi y agar ada jarak
+        scene.add(cube2);
+
+        // Membuat balok ketiga
+        const geometry3 = new THREE.BoxGeometry(2, 1, 1);
+        const material3 = new THREE.MeshPhongMaterial( { color: 0x0000ff } )
+        const cube3 = new THREE.Mesh(geometry3, material3);
+        cube3.position.set(0, 2.1 + gap, 0);
+        scene.add(cube3);
+
+        // Membuat balok keempat
+        const geometry4 = new THREE.BoxGeometry(2, 1, 1);
+        const material4 = new THREE.MeshPhongMaterial( { color: 0x00ff00 } )
+        const cube4 = new THREE.Mesh(geometry4, material4);
+        cube4.position.set(0, 0, 1 + gap);
+        scene.add(cube4);
+
+        // 
+        // Membuat balok kelime
+        const geometry5 = new THREE.BoxGeometry(2, 1, 1);
+        const material5 = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+        const cube5 = new THREE.Mesh(geometry5, material5);
+        cube5.position.set(0, 1 + gap, 1 + gap); // Atur posisi y agar ada jarak
+        scene.add(cube5);
+
+        // Membuat balok keenam
+        const geometry6 = new THREE.BoxGeometry(2, 1, 1);
+        const material6 = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+        const cube6 = new THREE.Mesh(geometry6, material6);
+        cube6.position.set(0, 2.1 + gap, 1 + gap); // Atur posisi y agar ada jarak
+        scene.add(cube6);
+
+        camera.position.z = 5;
+
+        // Pencahayaan
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const light = new THREE.PointLight(0xffffff, 1, 100);
+        light.position.set(50, 50, 50);
+        scene.add(light);
+
+        // Render
+        function animate() {
+            requestAnimationFrame(animate);
+           
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+
+</html>
